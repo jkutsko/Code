@@ -10,8 +10,13 @@ class Item_Build():
 			print "Too many items"
 			raise Exception
 		self.items = items
-		self.total_cost = sum(map(lambda k: k.cost, items))
-
+		
+	def get_total_cost(self):
+		if len(self.items) > 0:
+			return sum(map(lambda k: k.cost, items))
+		else:
+			return 0
+			
 	def add_item(self, item):
 		self.items.append(item)
 
@@ -20,7 +25,8 @@ class Item():
 		self.proc_chance = None
 		self.proc_type = None
 		self.proc_value = None
-		self.cleave_percent = None #for battle_fury
+		self.cleave_percent = None #for battle_fury, sven cleave, etc
+		self.evasion = 0
 		item_data = json.load(open(ITEM_DATA_PATH,"r"))
 		self.data = item_data[item_name]
 		if item_name in SPECIAL_ITEMS.keys():
@@ -31,10 +37,10 @@ class Item():
 		self.int = self.data["Int"]
 		self.str = self.data["Str"]
 		self.damage = self.data["Damage"]
-		self.attack_speed = self.data["attack_speed"]
+		self.attack_speed = self.data["Attack Speed"]
 		self.armor = self.data["Armor"]
 		self.magic_resist = self.data["Magic Resistance"]
-		self.lifesteal = self.data["lifesteal"]
+		self.lifesteal = self.data["Lifesteal"]
 		self.hp = self.data["HP"]
 		self.costs = self.data["Cost"]
 		self.cost = sum(self.costs)

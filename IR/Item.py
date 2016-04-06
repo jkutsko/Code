@@ -1,8 +1,14 @@
 import json
 
 ITEM_DATA_PATH = "../data/item_data.json"
-# Just these three for now, since limited item data
-SPECIAL_ITEMS = {"Monkey King Bar":["flat",.35,160], "Crystalys":["crit",.20, 1.75], "Daedalus":["crit",.3,2.20]}#,"Skull Basher"}
+SPECIAL_ITEMS = {"Monkey King Bar":["flat",.35,160],
+ "Crystalys":["crit",.20, 1.75],
+ "Daedalus":["crit",.3,2.20],
+ "Skull Basher":["flat", .25, 120],
+ "Maelstrom":["flat", .25, 120],
+ "Mjollnir":["flat",.2,200],
+ "Abyssal Blade":["flat",.25,120]
+ }
 
 class Item_Build():
 	def __init__(self, items):
@@ -16,7 +22,7 @@ class Item_Build():
 			return sum(map(lambda k: k.cost, items))
 		else:
 			return 0
-			
+
 	def add_item(self, item):
 		self.items.append(item)
 
@@ -33,17 +39,17 @@ class Item():
 			self.proc_type = SPECIAL_ITEMS[item_name][0]
 			self.proc_chance = SPECIAL_ITEMS[item_name][1]
 			self.proc_value = SPECIAL_ITEMS[item_name][2]
-		self.agi = self.data["Agi"]
-		self.int = self.data["Int"]
-		self.str = self.data["Str"]
-		self.damage = self.data["Damage"]
-		self.attack_speed = self.data["Attack Speed"]
+		self.agi = self.data["Agi"] + self.data["All"]
+		self.int = self.data["Int"] + self.data["All"]
+		self.str = self.data["Str"] + self.data["All"]
+		self.damage = self.data["Dmg"]
+		self.attack_speed = self.data["AS"]
 		self.armor = self.data["Armor"]
-		self.magic_resist = self.data["Magic Resistance"]
-		self.lifesteal = self.data["Lifesteal"]
-		self.hp = self.data["HP"]
-		self.costs = self.data["Cost"]
-		self.cost = sum(self.costs)
+		self.magic_resist = self.data["Spell Resist %"]
+		self.lifesteal = self.data["Life Steal %"]/100.0
+		self.hp = self.data["Health"]
+		self.costs = self.data["Gold Cost"]
+		self.evasion = self.data["Evasion %"]/100.0
 
 
 

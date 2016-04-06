@@ -41,6 +41,7 @@ def calculate_dps(attack_build, defend_build):
 # kill another. Currently, hp regen is not taken into account
 # Which shouldn't matter too much since hero skills and
 # regen items aren't handled yet because of lack of data...
+# TODO: Incorporate HP regen since I have data now
 def calculate_hits_to_kill(attack_build, defend_build):
 	frequency_counter = Counter()
 	for i in range(N_SIMULATIONS):

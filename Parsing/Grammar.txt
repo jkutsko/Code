@@ -1,0 +1,48 @@
+//Initial Grammar
+
+// program is a list of statements
+Program: Statements
+
+Statements: Empty | Statement \n Statements
+
+Statement: Assignment | For_loop | Query | Combat_Sim | Optimize_command | append_statement
+
+Assignment: var_name "=" Build_assignment 
+			| var_name "=" List_of_builds
+			| var_name "=" items_declaration
+			| var_name "=" Optimize_command
+
+
+Build_assignment: "level" int hero_name "with" items_declaration
+				| "level" int hero_name "with" var_name 
+
+items_declaration: "("item_name "and" item_name "and" item_name ")"
+					| "(" item_name "and" item_name ")"
+					| etc
+
+List_of_builds: "["var_names"]"
+
+var_names: var_name "," var_names
+			| empty
+
+
+For_loop: "foreach" var_name "in" var_name":\n" statements
+
+append_statement: "add" var_name "to" var_name
+
+Query: "get" Stat "of" var_name
+
+Combat_sim: "get" combat_stat "of" var_name "vs" var_name
+
+Optimize_command: "optimize" var_name "for" stat_name
+					| "optimize" var_name "for" combat_stat "vs" var_name
+
+var_name:  string
+
+hero_name: *List of hero names*
+
+item_name: *list of item names*
+
+Stat: attack_speed | damage | ... etc (gonna have to have a list of all valid stats)
+
+Empty: ""

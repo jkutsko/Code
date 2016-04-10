@@ -5,11 +5,13 @@ import matplotlib.pyplot as plt
 
 
 
-antimage = Build("Anti-Mage", 16, [4,4,4,3,1])
+antimage = Build("Anti-Mage", 25, [4,4,4,3])
 print antimage.get_base_damage()
 print antimage.get_total_damage()
 antimage.add_item_by_name("Monkey King Bar")
 antimage.add_item_by_name("Demon Edge")
+antimage.add_item_by_name("Butterfly")
+antimage.add_item_by_name("Crystalys")
 
 print antimage.get_base_damage()
 print antimage.get_total_damage()

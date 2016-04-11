@@ -83,12 +83,12 @@ class Items_Declaration(Value):
 	def add_item(self, item_name):
 		self.items.append(item_name)
 
-class Stat_Query(Statement):
+class Stat_Query(Query):
 	def __init__(self, stat_name, var_name):
 		self.stat_name = stat_name
 		self.var_name = var_name
 
-class Combat_Query(Statement):
+class Combat_Query(Query):
 	def __init__(self, stat_name, attack_build, defend_build):
 		self.stat_name = stat_name
 		self.attack_build = attack_build

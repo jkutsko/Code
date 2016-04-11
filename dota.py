@@ -4,13 +4,20 @@ import sys
 sys.path.insert(0,"IR")
 sys.path.insert(0,"AST")
 sys.path.insert(0,"Parsing")
+sys.path.insert(0,"data")
  
 import evaluator
 import dota_parser
 
-with open("Sample Programs/sample1.dota","r") as f:
-	x = dota_parser.parse(f.read())
-	print x
 
+
+file_path = "Sample Programs/"
+prgm_name = "sample1.dota"
+
+with open(file_path + prgm_name,'r') as f:
+	s = f.read()
+	x = dota_parser.parse(s)
+	e = evaluator.Evaluator()
+	e.evaluate(x)
 
 

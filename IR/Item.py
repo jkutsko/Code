@@ -1,6 +1,7 @@
 import json
 
-ITEM_DATA_PATH = "../data/item_data.json"
+ITEM_DATA_PATH = "data/item_data.json"
+
 SPECIAL_ITEMS = {"Monkey King Bar":["flat",.35,160],
  "Crystalys":["crit",.20, 1.75],
  "Daedalus":["crit",.3,2.20],
@@ -10,7 +11,7 @@ SPECIAL_ITEMS = {"Monkey King Bar":["flat",.35,160],
  "Abyssal Blade":["flat",.25,120]
  }
 
-class Item_Build():
+class Item_Build(object):
 	def __init__(self, items):
 		if len(items) > 6:
 			print "Too many items"
@@ -26,8 +27,9 @@ class Item_Build():
 	def add_item(self, item):
 		self.items.append(item)
 
-class Item():
+class Item(object):
 	def __init__(self, item_name, level = 0):
+		self.name = item_name
 		self.proc_chance = None
 		self.proc_type = None
 		self.proc_value = None

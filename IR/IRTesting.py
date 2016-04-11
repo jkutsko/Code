@@ -29,11 +29,3 @@ print combat.calculate_average_damage(poor_little_lion, antimage)
 D =  combat.calculate_hits_to_kill(antimage, poor_little_lion)
 print combat.calculate_hits_to_kill(antimage, antimage)
 
-dictionary = plt.figure()
-plt.bar(range(len(D)), map(lambda k: k/1000.0,D.values()), align='center')
-plt.xticks(range(len(D)), D.keys())
-plt.ylabel("Frequency")
-plt.xlabel("Number of Attacks")
-plt.title("Attacks it takes for Antimage to kill Lion")
-plt.show()
-

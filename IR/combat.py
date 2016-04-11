@@ -3,6 +3,7 @@ import item
 import math
 import random
 from collections import Counter
+import matplotlib.pyplot as plt 
 
 N_SIMULATIONS = 1000
 
@@ -53,6 +54,16 @@ def calculate_hits_to_kill(attack_build, defend_build):
 		frequency_counter[hit_count] += 1
 	return frequency_counter 
 
+def get_attacks_to_kill(attack_build, defend_build):
+	freq = calculate_hits_to_kill(attack_build, defend_build)
+	dictionary = plt.figure()
+	plt.bar(range(len(freq)), map(lambda k: k/float(N_SIMULATIONS),freq.values()), align='center')
+	plt.xticks(range(len(freq)), freq.keys())
+	plt.ylabel("Frequency")
+	plt.xlabel("Number of Attacks")
+	# TODO: Don't hard code this shit:
+	plt.title("Attacks it takes for " + attack_build.name + " to kill " +defend_build.name)
+	plt.show()
 
 def calculate_time_to_kill(attack_build, defend_build):
 	pass

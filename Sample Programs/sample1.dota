@@ -1,0 +1,11 @@
+build1 = level: 22 Sven with: (Daedalus and Butterfly)
+build2 = level: 16 Lion
+get: damage of: build1
+get: hp of: build1
+get: attacks of: build1 vs: build2
+build3 = level: 20 Morphling with: (Crystalys and Yasha)
+get: damage of: build3
+get: attacks of: build3 vs: build1
+items = (Daedalus and Butterfly and Yasha and Sange)
+build4 = level: 16 Lina with: items
+get: damage of: build4

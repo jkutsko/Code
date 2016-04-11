@@ -1,0 +1,18 @@
+build1 = level: 22 Sven with: (Daedalus and Butterfly)
+build3 = level: 20 Morphling with: (Crystalys and Yasha)
+items = (Daedalus and Butterfly and Yasha and Sange)
+build4 = level: 16 Lina with: items
+builds = [build1, build2, build4]
+
+for build in builds:
+	get: damage of: build
+	get: hp of: build
+
+max(damage, builds)
+
+optimize: build1 for:
+	damage: 6
+	ehp: 8
+	attack speed: 5
+	efficiency: 4
+

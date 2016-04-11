@@ -2,11 +2,11 @@
 A Program in this language is a list of statements
 '''
 
-class Program():
+class Program(object):
 	def __init__(self, statements = []):
 		self.statements = statements
 		self.variable_dict = {}
-	def add_statement(statement):
+	def add_statement(self, statement):
 		self.statements.append(statement)
 	def eval(self):
 		pass
@@ -18,7 +18,7 @@ by giving each a blank constructor and eval method and
 having each subclass implement both of those
 '''
 
-class Statement():
+class Statement(object):
 	def __init__(self):
 		pass
 	def eval(self):
@@ -30,7 +30,7 @@ class Query(Statement):
 	def eval(self):
 		pass
 
-class Value():
+class Value(object):
 	def __init__(self):
 		pass
 	def eval(self):
@@ -98,15 +98,15 @@ class Var_Name(Value):
 	def __init__(self, name):
 		self.name = name
 
-class Stat_Name():
+class Stat_Name(object):
 	def __init__(self, name):
 		self.name = name
 
-class Hero_Name():
+class Hero_Name(object):
 	def __init__(self, name):
 		self.name = name
 
-class Item_Name():
+class Item_Name(object):
 	def __init__(self, name):
 		self.name = name
 

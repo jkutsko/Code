@@ -3,6 +3,7 @@ import sys
 sys.path.insert(0,"../AST")
 from ast import *
 
+
 '''
 Parsing helper functions:
 '''
@@ -13,12 +14,17 @@ def parse_item_def(x):
 		items.add_item(item)
 	return items
 
+def parse_program(x):
+	p = Program([x[0]])
+	for i in x[1:]:
+		p.add_statement(i)
+	return p
 
 '''
 Forward parser declarations
 '''
 statement = Forward()
-program = OneOrMore(statement)
+program = OneOrMore(statement)[lambda x: parse_program(x)]
 var_name = (Exact(ZeroOrMore(Alphanum() - CharIn('\"," ","="'))))["".join][lambda x: Var_Name(x)]
 hero_name = Forward()
 item_name = Forward()
@@ -66,5 +72,7 @@ stat_name << alpha_word["".join][lambda x: Stat_Name(x)]
 item_name << alpha_word["".join][lambda x: Item_Name(x)]
 
 
+def parse(string):
+	return program.parse_string(string)
 x = statement.parse_string("build1 = level: 22 AntiMage with: (daedalus and mekansm and butterfly)")
-print x
+print type(x).__name__

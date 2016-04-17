@@ -4,11 +4,13 @@ items = (Daedalus and Butterfly and Yasha and Sange)
 build4 = level: 16 Lina with: items
 builds = [build1, build2, build4]
 
-for build in builds:
+for build in builds{
 	get: damage of: build
 	get: hp of: build
+}
 
 max(damage, builds)
+max(attacks vs build2, builds)
 
 optimize: build1 for:
 	damage: 6

@@ -35,17 +35,18 @@ Parser objects for defining values
 (builds, item builds, lists, etc)
 '''
 
-items_definition = ("(" + item_name + Repeat(("and" + item_name),0,5)  + ")")[parse_item_def]
+items_definition = ("(" + item_name + Repeat(("," + item_name),0,5)  + ")")[parse_item_def]
 
 build_assignment = (
 	("level: " + number[int] + hero_name + "with:" + items_definition)[lambda x: Build_Assignment_Items(x[0],x[1],x[2])]\
 	| ("level: " + number[int] + hero_name + "with:" + var_name)[lambda x: Build_Assignment_Value(x[0],x[1],x[2])]\
 	| ("level: " + number[int] + hero_name )[lambda x: Build_Assignment_NoItems(x[0],x[1])])
 
+list_of_builds = ("[" + OneOrMore(build + ",") + "]")[parse_list]
 
 build = (build_assignment | var_name)
 
-value = (build_assignment | items_definition | var_name) # | list_of_builds | optimize_command
+value = (build_assignment | items_definition | var_name | list_of_builds) #| optimize_command
 
 
 '''
@@ -65,13 +66,26 @@ optimize_command = (
 	("optimize:" + build + "for:" +  stat_name + "vs:" + build)[lambda x: Combat_Query(x[1],x[0],x[2])]
 	| ("optimize:" + build + "for:" +  stat_name)[lambda x: Stat_Query(x[1],x[0])])
 
+for_loop = (
+	("foreach:" + var_name + "in:" + list_of_builds + "{"+ OneOrMore(statement) + "}")
+	| ("foreach:" + var_name + "in:" + var_name + "{" + OneOrMore(statement) + "}")
 
+'''
+basic definitions
+'''
+thing_word = Word('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-') - "with:" - "get:" - "of:" - "," - "and:"
+thing_name =  OneOrMore(thing_word)[lambda k: reduce(lambda x,y: x + " " + y, k)]
 statement << (query | optimize_command | assignment )
-hero_name << alpha_word[lambda x: Hero_Name(x)]
-stat_name << alpha_word["".join][lambda x: Stat_Name(x)]
-item_name << alpha_word["".join][lambda x: Item_Name(x)]
+hero_name << thing_name[lambda x: Hero_Name(x)]
+stat_name << thing_name["".join][lambda x: Stat_Name(x)]
+item_name << thing_name["".join][lambda x: Item_Name(x)]
 
 
 
 def parse(string):
 	return program.parse_string(string)
+
+
+#print (OneOrMore(alpha_word - "with" - "vs")).parse_string("blah blahs with")
+print program.parse_string("build1 = level: 22 Dragon Knight with: (Daedalus, Butterfly)")
+

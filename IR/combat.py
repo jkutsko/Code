@@ -61,7 +61,6 @@ def get_attacks_to_kill(attack_build, defend_build):
 	plt.xticks(range(len(freq)), freq.keys())
 	plt.ylabel("Frequency")
 	plt.xlabel("Number of Attacks")
-	# TODO: Don't hard code this shit:
 	plt.title("Attacks it takes for " + attack_build.name + " to kill " +defend_build.name)
 	plt.show()
 

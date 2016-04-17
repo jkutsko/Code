@@ -59,6 +59,8 @@ class For_Loop(Statement):
 		self.list_name = list_name
 		self.statements = statements
 
+class list_of_builds
+
 class Build_Assignment_Items(Build_Assignment):
 	def __init__(self, level, hero_name, items_dec):
 		self.level = level
@@ -109,7 +111,5 @@ class Hero_Name(object):
 class Item_Name(object):
 	def __init__(self, name):
 		self.name = name
-
-
 
 

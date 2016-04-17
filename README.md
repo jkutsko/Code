@@ -9,8 +9,9 @@ Currently, this runs by using the python file "dota.py" in the main directory. T
 parcon ("pip install parcon")
 matplotlib ("pip install matplotlib")
 ```
+To run, edit the line of dota.py with ```prgm_name``` to have the name of your file. Then enter: ```python dota.py``` in your command line in the main project directory. Yes, this is gross. No, its not the final implementation. 
 
-Then, you can run the program by following the examples in Sample Programs/sample1.dota
+Then, you can write a program by following the examples in Sample Programs/sample1.dota
 
 Essentially, you specify a build as:
 
@@ -37,6 +38,23 @@ You can also get the number of attacks it takes for one build to kill another, l
 get: attacks of: build1 vs: build2:
 ```
 
-Thats about it at the moment, soon lists, loops, and more stat queries will be available, followed by the ```optimize``` keyword!
+Thats about it at the moment, soon lists, loops, and more stat queries will be available, followed by the ```optimize``` keyword.
+
+
+
+
+#TODO:
+
+- Add for loops and lists to grammar and abstract syntax tree. 
+- add the evaluator for for loops and lists
+- add optimize command to the backend
+- add optimize command to the grammar, ast, and eval
+- add efficiency somehow (probably with faked item data for buildup items)
+- include all data queries
+- add hero ability data
+- beef up combat simulation
+- make specifying hero/item/data names smart
+- include hero abilities to grammar/ast/eval
+- include other syntax elements when I think of them
 
 

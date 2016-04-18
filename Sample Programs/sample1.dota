@@ -9,3 +9,14 @@ get: attacks of: build3 vs: build1
 items = (Daedalus, Butterfly, Yasha, Sange)
 build4 = level: 16 Lina with: items
 get: damage of: level: 16 Lina with: items
+
+build1 = level: 22 Sven with: (Daedalus and Butterfly)
+build3 = level: 20 Morphling with: (Crystalys and Yasha)
+items = (Daedalus and Butterfly and Yasha and Sange)
+build4 = level: 16 Lina with: items
+builds = [build1, build2, build4]
+
+for: build in: builds{
+	get: damage of: build
+	get: hp of: build
+}

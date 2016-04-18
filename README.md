@@ -1,5 +1,5 @@
-# Code
-Code for DSLs Project
+# DOTA-Builder
+Code repository for DSLs Project
 
 # How to run
 
@@ -47,13 +47,13 @@ Thats about it at the moment, soon lists, loops, and more stat queries will be a
 
 - Add for loops and lists to grammar and abstract syntax tree. 
 - add the evaluator for for loops and lists
-- add optimize command to the backend
-- add optimize command to the grammar, ast, and eval
-- add efficiency somehow (probably with faked item data for buildup items)
 - include all data queries
 - add hero ability data
 - beef up combat simulation
+- add optimize command to the backend
+- add optimize command to the grammar, ast, and eval
 - make specifying hero/item/data names smart
+- add efficiency somehow (probably with faked item data for buildup items)
 - include hero abilities to grammar/ast/eval
 - include other syntax elements when I think of them
 

@@ -6,6 +6,8 @@ from build import Build
 from combat import *
 from item import *
 
+from copy import deepcopy
+
 # Evaluates the abstract syntax tree result of parsing a program
 class Evaluator(object):
 	def __init__(self):
@@ -68,11 +70,14 @@ class Evaluator(object):
 			get_attacks_to_kill(att_build, def_build)
 
 	def eval_for_loop(self, statement):
-		pass
+		for list_elem in self.eval_value(statement.list):
+			self.var_dict[statement.var_name] = self.eval_value(list_elem)
+			for inner_statement in statement.statements:
+				self.eval_statement(inner_statement)
 
 	# don't even have backend for this yet, lol
 	def eval_optimize_command(self, statement):
-		pass
+		print "optimizing something, trust me"
 
 	'''
 	Evaluators that return things
@@ -85,6 +90,8 @@ class Evaluator(object):
 			return self.eval_item_dec(value)
 		elif t.startswith("Build_Assignment"):
 			return self.eval_build_assignment(value)
+		elif t == "List_Of_Builds":
+			return list(map(lambda k: self.eval_value(k), value.builds))
 		else:
 			print "Type not found"
 

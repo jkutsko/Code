@@ -20,6 +20,11 @@ def parse_program(x):
 		p.add_statement(i)
 	return p
 
+# x is [build1,[builds]]
+def parse_list(x):
+	return List_Of_Builds([x[0]] + x[1])
+
+
 '''
 Forward parser declarations
 '''
@@ -42,11 +47,13 @@ build_assignment = (
 	| ("level: " + number[int] + hero_name + "with:" + var_name)[lambda x: Build_Assignment_Value(x[0],x[1],x[2])]\
 	| ("level: " + number[int] + hero_name )[lambda x: Build_Assignment_NoItems(x[0],x[1])])
 
-list_of_builds = ("[" + OneOrMore(build + ",") + "]")[parse_list]
 
 build = (build_assignment | var_name)
 
-value = (build_assignment | items_definition | var_name | list_of_builds) #| optimize_command
+list_of_builds = (("[" + build + OneOrMore("," + build) +  "]")[parse_list]
+				| var_name)
+
+value = (build_assignment | items_definition | list_of_builds | var_name ) #| optimize_command
 
 
 '''
@@ -66,16 +73,14 @@ optimize_command = (
 	("optimize:" + build + "for:" +  stat_name + "vs:" + build)[lambda x: Combat_Query(x[1],x[0],x[2])]
 	| ("optimize:" + build + "for:" +  stat_name)[lambda x: Stat_Query(x[1],x[0])])
 
-for_loop = (
-	("foreach:" + var_name + "in:" + list_of_builds + "{"+ OneOrMore(statement) + "}")
-	| ("foreach:" + var_name + "in:" + var_name + "{" + OneOrMore(statement) + "}")
+for_loop = ("for:" + var_name + "in:" + list_of_builds + "{"+ OneOrMore(statement) + "}")[lambda x: For_Loop(x[0], x[1], x[2])]
 
 '''
 basic definitions
 '''
 thing_word = Word('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-') - "with:" - "get:" - "of:" - "," - "and:"
 thing_name =  OneOrMore(thing_word)[lambda k: reduce(lambda x,y: x + " " + y, k)]
-statement << (query | optimize_command | assignment )
+statement << (query | for_loop | optimize_command | assignment )
 hero_name << thing_name[lambda x: Hero_Name(x)]
 stat_name << thing_name["".join][lambda x: Stat_Name(x)]
 item_name << thing_name["".join][lambda x: Item_Name(x)]
@@ -87,5 +92,5 @@ def parse(string):
 
 
 #print (OneOrMore(alpha_word - "with" - "vs")).parse_string("blah blahs with")
-print program.parse_string("build1 = level: 22 Dragon Knight with: (Daedalus, Butterfly)")
+print statement.parse_string("for: build in: builds {get: damage of: build 	get: hp of: build}")
 

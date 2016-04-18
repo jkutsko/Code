@@ -12,7 +12,7 @@ import dota_parser
 
 
 file_path = "Sample Programs/"
-prgm_name = "sample1.dota"
+prgm_name = "sample2.dota"
 
 with open(file_path + prgm_name,'r') as f:
 	s = f.read()

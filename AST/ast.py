@@ -54,12 +54,14 @@ class Assignment(Statement):
 		self.var_name = var_name
 
 class For_Loop(Statement):
-	def __init__(self, var_name, list_name, statements):
+	def __init__(self, var_name, iter_list, statements):
 		self.var_name = var_name
-		self.list_name = list_name
+		self.list = iter_list
 		self.statements = statements
 
-class list_of_builds
+class List_Of_Builds(Value):
+	def __init__(self, builds):
+		self.builds = builds
 
 class Build_Assignment_Items(Build_Assignment):
 	def __init__(self, level, hero_name, items_dec):

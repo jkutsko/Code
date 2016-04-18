@@ -70,10 +70,8 @@ class Evaluator(object):
 			get_attacks_to_kill(att_build, def_build)
 
 	def eval_for_loop(self, statement):
-		print self.eval_value(statement.list)
 		for list_elem in self.eval_value(statement.list):
 			self.var_dict[statement.var_name.name] = list_elem
-			print self.var_dict
 			for inner_statement in statement.statements:
 				self.eval_statement(inner_statement)
 

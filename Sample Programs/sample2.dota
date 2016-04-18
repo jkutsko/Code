@@ -1,0 +1,7 @@
+build1 = level: 22 Sven with: (Daedalus, Butterfly)
+build3 = level: 20 Morphling with: (Crystalys, Yasha)
+builds = [build1, build3]
+for: build in: builds {
+	get: damage of: build
+	get: hp of: build
+}

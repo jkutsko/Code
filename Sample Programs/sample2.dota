@@ -1,4 +1,4 @@
-build1 = level: 22 Sven with: (Daedalus, Butterfly)
+build1 = level: 22 Sven with: (Daedalus, mkb)
 build3 = level: 20 Morphling with: (Crystalys, Yasha)
 builds = [build1, build3]
 for: build in: builds {

@@ -49,11 +49,28 @@ class Evaluator(object):
 		if stat_name == "damage":
 			base = build_value.get_base_damage()
 			plus = build_value.plus_damage
-			print str(base) + " + " + str(plus)
+			print build_value.name + " has " + str(base) + " + " + str(plus)  + " " + stat_name
 		elif stat_name == "hp":
-			print build_value.get_hp()
+			print build_value.name + " has " + str(build_value.get_hp()) + " " + stat_name
+		elif stat_name == "agi":
+			print build_value.name + " has  " + str(build_value.agi) + " " + stat_name
+		elif stat_name == "int":
+			print build_value.name + " has " + str(build_value.agi) + " " + stat_name
+		elif stat_name == "str":
+			print build_value.name + " has " + str(build_value.agi) + " " + stat_name
+		elif stat_name == "attack speed":
+			print build_value.name + " has " + str(build_value.get_attack_speed()) + " " + stat_name
+		elif stat_name == "attacks per second":
+			print build_value.name + " has " + str(build_value.get_aps()) + " " + stat_name
+		elif stat_name == "armor":
+			print build_value.name + " has " + str(build_value.get_armor()) + " " + stat_name
+		elif stat_name == "mana":
+			print build_value.name + " has " + str(build_value.get_mana()) + " " + stat_name
 		else:
-			print stat_name + "not valid query"
+			try:
+				print build_value.get_stats(stat_name)
+			except Exception:
+				print stat_name + "not valid query"
 		# TODO: finish this for not demo stuff
 
 	def eval_combat_query(self, statement):

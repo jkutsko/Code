@@ -129,14 +129,6 @@ class Build(object):
     def get_stats(self, stat_name):
         return self.hero_data[stat_name]
     
-    '''
-    Returns a bunch of stats regarding a fight between self
-    and other_hero.
-    other_hero is another Build object
-
-    '''
-    def fights(self, other_hero):
-        pass
 
 
 

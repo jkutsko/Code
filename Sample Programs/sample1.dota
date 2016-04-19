@@ -10,9 +10,9 @@ items = (Daedalus, Butterfly, Yasha, Sange)
 build4 = level: 16 Lina with: items
 get: damage of: level: 16 Lina with: items
 
-build1 = level: 22 Sven with: (Daedalus and Butterfly)
-build3 = level: 20 Morphling with: (Crystalys and Yasha)
-items = (Daedalus and Butterfly and Yasha and Sange)
+build1 = level: 22 Sven with: (Daedalus, Butterfly)
+build3 = level: 20 Morphling with: (Crystalys, Yasha)
+items = (Daedalus, Butterfly, Sange)
 build4 = level: 16 Lina with: items
 builds = [build1, build2, build4]
 

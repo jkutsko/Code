@@ -12,9 +12,10 @@ for build in builds{
 max(damage, builds)
 max(attacks vs build2, builds)
 
-optimize: build1 for:
+optimize: build1 for{
 	damage: 6
 	ehp: 8
 	attack speed: 5
 	efficiency: 4
+	damage vs: build3 }
 

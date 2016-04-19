@@ -90,7 +90,6 @@ item_name << thing_name["".join][lambda x: Item_Name(x)]
 def parse(string):
 	return program.parse_string(string)
 
-
-#print (OneOrMore(alpha_word - "with" - "vs")).parse_string("blah blahs with")
-print statement.parse_string("for: build in: builds {get: damage of: build 	get: hp of: build}")
+if __name__ == '__main__':
+	print statement.parse_string("for: build in: builds {get: damage of: build 	get: hp of: build}")
 

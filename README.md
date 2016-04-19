@@ -9,9 +9,9 @@ Currently, this runs by using the python file "dota.py" in the main directory. T
 parcon ("pip install parcon")
 matplotlib ("pip install matplotlib")
 ```
-To run, edit the line of dota.py with ```prgm_name``` to have the name of your file. Then enter: ```python dota.py``` in your command line in the main project directory. Yes, this is gross. No, its not the final implementation. 
+To run, first make a file with your program in the Sample Programs folder. Then, edit the line of dota.py with ```prgm_name``` (line 15) to have the name of your file. Then enter: ```python dota.py``` in your command line in the main project directory. Yes, this is gross. No, its not the final implementation. Working on other parts of this at the moment. 
 
-Then, you can write a program by following the examples in Sample Programs/sample1.dota
+To write a program, you can write a program by following the examples in Sample Programs/sample1.dota
 
 Essentially, you specify a build as:
 
@@ -25,18 +25,31 @@ adding items is optional, and you can give the hero a preset item build by decla
 items = (item1 and item2 and ...)
 ```
 
-Then, you can query for stats of a build. Currently, the only available stats are:
-"damage", and "hp", like:
+Then, you can query for stats of a build:
 
 ```
 get: damage of: build1
 ```
+
+The available stat queries are:
+- "damage"
+- "hp"
+- "armor"
+- "agi"
+- "int"
+- "str"
+- "attack speed"
+- "mana"
+- "attacks per second"
+
 
 You can also get the number of attacks it takes for one build to kill another, like:
 
 ```
 get: attacks of: build1 vs: build2:
 ```
+
+Which will bring up a frequency graph of how many attacks it might take for build1 to kill build2
 
 Thats about it at the moment, soon lists, loops, and more stat queries will be available, followed by the ```optimize``` keyword.
 
@@ -45,9 +58,9 @@ Thats about it at the moment, soon lists, loops, and more stat queries will be a
 
 #TODO:
 
-- Add for loops and lists to grammar and abstract syntax tree. 
-- add the evaluator for for loops and lists
-- include all data queries
+- Add for loops and lists to grammar and abstract syntax tree. DONE
+- add the evaluator for for loops and lists DONE
+- include all data queries - DONE (but only for stats, not combat)
 - add hero ability data
 - beef up combat simulation
 - add optimize command to the backend

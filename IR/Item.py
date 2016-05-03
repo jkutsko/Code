@@ -11,6 +11,9 @@ SPECIAL_ITEMS = {"Monkey King Bar":["flat",.35,160],
  "Abyssal Blade":["flat",.25,120]
  }
 
+def get_item_list():
+	item_data = json.load(open(ITEM_DATA_PATH,"r"))
+	return item_data.keys()
 class Item_Build(object):
 	def __init__(self, items):
 		if len(items) > 6:

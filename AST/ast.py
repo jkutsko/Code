@@ -43,6 +43,11 @@ class Build_Assignment(Value):
 	def eval(self):
 		pass
 
+class Stat_declaration(object):
+	def __init__(self):
+		pass
+	def eval(self):
+		pass
 
 '''
 The implementation classes go here
@@ -98,11 +103,29 @@ class Combat_Query(Query):
 		self.attack_build = attack_build
 		self.defend_build = defend_build
 
+class Base_Stat_Declaration(Stat_declaration):
+	def __init__(self, stat_name):
+		self.stat_name = stat_name
+
+class Combat_Stat_Declaration(Stat_declaration):
+	def __init__(self, stat_name, other_build):
+		self.stat_name = stat_name
+		self.other_build = other_build
+
+class Optimize_Command(Value):
+	def __init__(self, build, parameters):
+		self.build = build
+		self.parameters = parameters
+
 class Var_Name(Value):
 	def __init__(self, name):
 		self.name = name
 
 class Stat_Name(object):
+	def __init__(self, name):
+		self.name = name
+
+class Combat_Stat_Name(object):
 	def __init__(self, name):
 		self.name = name
 

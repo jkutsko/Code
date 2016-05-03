@@ -34,6 +34,8 @@ var_name = (Exact(ZeroOrMore(Alphanum() - CharIn('\"," ","="'))))["".join][lambd
 hero_name = Forward()
 item_name = Forward()
 stat_name = Forward()
+combat_stat_name = Forward()
+optimize_command = Forward()
 
 '''
 Parser objects for defining values
@@ -55,6 +57,9 @@ list_of_builds = (("[" + build + OneOrMore("," + build) +  "]")[parse_list]
 
 value = (build_assignment | items_definition | list_of_builds | var_name ) #| optimize_command
 
+stat_dec = (
+	(combat_stat_name + "vs:" + build)[lambda x: Combat_Stat_Declaration(x[0],x[1])]
+	| (stat_name)[lambda x: Base_Stat_Declaration(x)])
 
 '''
 Assignment
@@ -66,23 +71,22 @@ assignment = (var_name + "=" + value)[lambda x: Assignment(x[0],x[1])]
 Commands that actually do things
 '''
 query = (
-	 ("get:" + stat_name + "of:" + build + "vs:" + build)[lambda x: Combat_Query(x[0],x[1],x[2])]
+	 ("get:" + combat_stat_name + "of:" + build + "vs:" + build)[lambda x: Combat_Query(x[0],x[1],x[2])]
 	 | ("get:" + stat_name + "of:" + build)[lambda x: Stat_Query(x[0],x[1])])
 
-optimize_command = (
-	("optimize:" + build + "for:" +  stat_name + "vs:" + build)[lambda x: Combat_Query(x[1],x[0],x[2])]
-	| ("optimize:" + build + "for:" +  stat_name)[lambda x: Stat_Query(x[1],x[0])])
+optimize_command << ("optimize:" + build + "for:" + "{" + OneOrMore((stat_dec + ":" + number[int])) + "}")[lambda x: Optimize_Command(x[0],x[1])]
 
 for_loop = ("for:" + var_name + "in:" + list_of_builds + "{"+ OneOrMore(statement) + "}")[lambda x: For_Loop(x[0], x[1], x[2])]
 
 '''
 basic definitions
 '''
-thing_word = Word('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-') - "with:" - "get:" - "of:" - "," - "and:"
+thing_word = Word('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-') - "with:" - "get:" - "of:" - "," - "and:" - "vs:"
 thing_name =  OneOrMore(thing_word)[lambda k: reduce(lambda x,y: x + " " + y, k)]
 statement << (query | for_loop | optimize_command | assignment )
 hero_name << thing_name[lambda x: Hero_Name(x)]
 stat_name << thing_name["".join][lambda x: Stat_Name(x)]
+combat_stat_name << thing_name["".join][lambda x: Combat_Stat_Name(x)]
 item_name << thing_name["".join][lambda x: Item_Name(x)]
 
 
@@ -91,5 +95,5 @@ def parse(string):
 	return program.parse_string(string)
 
 if __name__ == '__main__':
-	print statement.parse_string("for: build in: builds {get: damage of: build 	get: hp of: build}")
+	print stat_dec.parse_string("damage vs: build3:")
 

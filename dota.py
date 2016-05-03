@@ -12,12 +12,12 @@ import dota_parser
 
 
 file_path = "Sample Programs/"
-prgm_name = "sample1.dota"
+prgm_name = "demo_example1.dota"
 
 
 if __name__ == '__main__':
-	#fname = raw_input("Enter your file name: ")
-	with open(file_path + prgm_name,'r') as f:
+	fname = raw_input("Enter your file name: ")
+	with open(fname,'r') as f:
 		s = f.read()
 		x = dota_parser.parse(s)
 		e = evaluator.Evaluator()
